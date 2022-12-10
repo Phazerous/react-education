@@ -2,9 +2,13 @@ import React from "react";
 
 function ToDoItem(props) {
   return (
-    <li onClick={() => {
-      props.onClick(props.id);
-    }}>{props.text}</li>
+    <div
+      onClick={() => {
+        props.onChecked(props.id);
+      }}
+    >
+      <li>{props.text}</li>
+    </div>
   );
 }
 
