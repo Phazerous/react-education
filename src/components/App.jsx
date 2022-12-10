@@ -1,22 +1,14 @@
 import React from "react";
-import Card from "./Card";
-import contacts from "../contacts";
-
-function createCard(contact) {
-  return (
-    <Card
-      name={contact.name}
-      imgURL={contact.imgURL}
-      phone={contact.phone}
-      email={contact.email}
-    />
-  );
-}
+import Dictionary from "./Dictionary";
+import Header from "./Header";
 
 function App() {
-  return <div>
-    {contacts.map(createCard)}
-  </div>
+  return (
+    <div>
+      <Header />
+      <Dictionary />
+    </div>
+  );
 }
 
 export default App;
