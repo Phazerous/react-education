@@ -1,40 +1,49 @@
 import React, { useState } from "react";
 
 function App() {
-  const [fullName, setFullName] = useState({
-    fName: '',
-    lName: ''
+  const [contact, setContact] = useState({
+    fName: "",
+    lName: "",
+    email: ""
   });
 
   function handleChange(e) {
     const { value, name } = e.target;
 
-    setFullName((prevValue) => {
+    setContact((prevValue) => {
       if (name === 'fName') {
         return {
           fName: value,
-          lName: prevValue.lName
+          lName: prevValue.lName,
+          email: prevValue.email
+        }
+      } else if (name === 'lName') {
+        return {
+          fName: prevValue.fName,
+          lName: value,
+          email: prevValue.email
+        }
+      } else if (name === 'email') {
+        return {
+          fName: prevValue.fName,
+          lName: prevValue.lName,
+          email: value
         }
       }
-
-      return {
-        fName: prevValue.fName,
-        lName: value
-      }
-    });
-  }
-
-  function handleClick(e) {
-    e.preventDefault();
+    })
   }
 
   return (
     <div className="container">
-      <h1>Hello {fullName.fName} {fullName.lName}</h1>
+      <h1>
+        Hello {contact.fName} {contact.lName}
+      </h1>
+      <p>{contact.email}</p>
       <form>
-        <input name="fName" placeholder="First Name" onChange={handleChange} />
-        <input name="lName" placeholder="Last Name" onChange={handleChange} />
-        <button onClick={handleClick}>Submit</button>
+        <input onChange={handleChange} name="fName" placeholder="First Name" />
+        <input onChange={handleChange} name="lName" placeholder="Last Name" />
+        <input onChange={handleChange} name="email" placeholder="Email" />
+        <button>Submit</button>
       </form>
     </div>
   );
