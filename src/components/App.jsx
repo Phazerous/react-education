@@ -11,24 +11,9 @@ function App() {
     const { value, name } = e.target;
 
     setContact((prevValue) => {
-      if (name === 'fName') {
-        return {
-          fName: value,
-          lName: prevValue.lName,
-          email: prevValue.email
-        }
-      } else if (name === 'lName') {
-        return {
-          fName: prevValue.fName,
-          lName: value,
-          email: prevValue.email
-        }
-      } else if (name === 'email') {
-        return {
-          fName: prevValue.fName,
-          lName: prevValue.lName,
-          email: value
-        }
+      return {
+        ...prevValue, // spread operator
+        [name]: value // we put the name of our input field in the square brackets, so the JS will interpretate input field with its name and not "name" property.
       }
     })
   }
