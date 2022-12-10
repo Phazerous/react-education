@@ -1,42 +1,35 @@
 import React, { useState } from "react";
-import ToDoItem from "./ToDoItem";
-import InputArea from "./InputArea";
+import Header from "./Header";
+import Footer from "./Footer";
+import Note from "./Note";
+import CreateArea from "./CreateArea";
+import { nanoid } from "nanoid";
 
 function App() {
-  const [items, setItems] = useState([]);
+  const [notes, setNotes] = useState([]);
 
-  function addItem(noteText) {
-    setItems(prevItems => {
-      return [...prevItems, noteText];
-    });
+  function addNote(title, content) {
+    setNotes(prevValues => {
+      const updatedValues = [...prevValues, { title: title, content: content, id: nanoid() }];
+      return updatedValues;
+    })
   }
 
-  function deleteItem(id) {
-    setItems(prevItems => {
-      return prevItems.filter((item, index) => {
-        return index !== id;
-      });
-    });
+  function deleteNote(id) {
+    setNotes(prevValues => {
+      const updatedValues = prevValues.filter(note => note.id !== id);
+      return updatedValues;
+    })
   }
 
   return (
-    <div className="container">
-      <div className="heading">
-        <h1>To-Do List</h1>
-      </div>
-      <InputArea addItem={addItem} />
-      <div>
-        <ul>
-          {items.map((todoItem, index) => (
-            <ToDoItem
-              key={index}
-              id={index}
-              text={todoItem}
-              onChecked={deleteItem}
-            />
-          ))}
-        </ul>
-      </div>
+    <div>
+      <Header />
+      <CreateArea onAdd={addNote} />
+      {notes.map(note => {
+        return <Note key={note.id} id={note.id} title={note.title} content={note.content} onDelete={deleteNote} />
+      })}
+      <Footer />
     </div>
   );
 }
