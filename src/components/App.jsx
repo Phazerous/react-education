@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import colorData from "../color-data.js";
+import AddColorForm from "./AddColorForm.jsx";
 import ColorList from "./ColorList.jsx";
+import { nanoid } from "nanoid";
 
 export default function App() {
   const [colors, setColors] = useState(colorData);
@@ -15,8 +17,22 @@ export default function App() {
     setColors(updatedColors);
   }
 
+  const newColor = (title, color) => {
+    const updatedColors = [...colors, {
+      id: nanoid(),
+      title: title,
+      color: color,
+      rating: 0
+    }];
+    console.log(color);
+    setColors(updatedColors);
+  }
+
   return (
     <>
+      <AddColorForm
+        onNewColor={newColor}
+      />
       <ColorList
         colors={colors}
         onRemoveColor={removeColor}
