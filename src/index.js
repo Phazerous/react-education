@@ -1,4 +1,5 @@
+import React from "react";
 import ReactDOM from "react-dom";
-import reactElement from "./outdated";
+import App from "./components/App";
 
-ReactDOM.render(reactElement, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'));
