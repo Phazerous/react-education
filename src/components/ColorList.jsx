@@ -1,11 +1,10 @@
 import React from "react";
 import Color from "./Color";
+import { useColors } from "./ColorProvider";
 
-export default function ColorList({
-  colors = [],
-  onRemoveColor = f => f,
-  onRateColor = f => f
-}) {
+export default function ColorList() {
+  const { colors, rateColor, removeColor } = useColors();
+
   return (
     <>
       {console.log(colors)}
@@ -16,8 +15,8 @@ export default function ColorList({
           title={color.title}
           color={color.color}
           rating={color.rating}
-          onRate={rating => onRateColor(color.id, rating)}
-          onRemove={() => onRemoveColor(color.id)}
+          onRate={rating => rateColor(color.id, rating)}
+          onRemove={() => removeColor(color.id)}
         />
       })}
     </>

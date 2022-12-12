@@ -1,8 +1,10 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 import { nanoid } from "nanoid";
 import colorData from "../color-data.js";
 
 const ColorContext = createContext();
+
+export const useColors = () => useContext(ColorContext);
 
 export default function ColorProvider({ children }) {
   const [colors, setColors] = useState(colorData);
